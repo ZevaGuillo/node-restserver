@@ -35,18 +35,19 @@ const UsuarioSchema = Schema({
         emun: ['ADMIN_ROLE', 'USER_ROLE']
     },
     state: {
-        type: String,
+        type: Boolean,
         default: true,
     }, 
     google: {
-        type: String,
+        type: Boolean,
         default: false,
     }
 });
 
 // Sobreescribir el metodo de impresion en json
 UsuarioSchema.methods.toJSON = function(){
-    const { __v, password , ...usuario} = this.toObject();
+    const { __v, password, _id , ...usuario} = this.toObject();
+    usuario['uid'] = _id;
     return usuario;
 }
 
